@@ -15,7 +15,7 @@ class NameForm(FlaskForm):
     submit = SubmitField('Submit')
 
 
-class UserForm(FlaskForm):
+class ConfigurationForm(FlaskForm):
     max_allowed = IntegerField(validators=[DataRequired()])
     submit = SubmitField("bestätigen")
 
@@ -27,6 +27,15 @@ def index():
         session['name'] = form.name.data
         return redirect(url_for('index'))
     return render_template('index.html', name=session.get('name'), form=form)
+
+
+@app.route("/config", methods=['POST', 'GET'])
+def config():
+    form = ConfigurationForm()
+    if form.validate_on_submit():
+        session['max_allowed'] = form.max_allowed.data
+        return redirect(url_for('config'))
+    return render_template('config.html', name=session.get('max_allowed'), form=form)
 
 
 @app.route("/user/<name>")

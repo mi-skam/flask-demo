@@ -5,7 +5,8 @@
 
 {% block page_content %}
 <div>
-  <h1>Hello, {% if name %} {{ name }} {% else %} Stranger {% endif %}!</h1>
+  <h1>Configuration</h1>
+  <p>Max allowed {% if max_allowed %} {{ max_allowed }} {% else %} 0 {% endif %}</p>
 </div>
 
 {{ wtf.quick_form(form) }}
